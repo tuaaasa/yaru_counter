@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kabaddi - 操作パネル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="operate-page">
+  <a href="index.html" class="page-switch-btn">表示 →</a>
+
+  <div class="current-scores">
+    <div class="current-score-home">
+      HOME <span class="current-score-value" id="op-home-score">00</span>
+    </div>
+    <div class="current-score-separator">:</div>
+    <div class="current-score-guest">
+      <span class="current-score-value" id="op-guest-score">00</span> GUEST
+    </div>
+  </div>
+
+  <div class="teams-grid">
+    <div class="team-controls home-controls">
+      <h2>HOME</h2>
+      <div class="score-buttons">
+        <button class="score-btn plus" data-team="home" data-points="1">+1</button>
+        <button class="score-btn plus" data-team="home" data-points="2">+2</button>
+        <button class="score-btn plus" data-team="home" data-points="5">+5</button>
+      </div>
+      <div class="minus-row">
+        <button class="score-btn minus" data-team="home" data-points="-1">−1</button>
+      </div>
+    </div>
+    <div class="team-controls guest-controls">
+      <h2>GUEST</h2>
+      <div class="score-buttons">
+        <button class="score-btn plus" data-team="guest" data-points="1">+1</button>
+        <button class="score-btn plus" data-team="guest" data-points="2">+2</button>
+        <button class="score-btn plus" data-team="guest" data-points="5">+5</button>
+      </div>
+      <div class="minus-row">
+        <button class="score-btn minus" data-team="guest" data-points="-1">−1</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-buttons">
+    <button class="undo-btn" id="undo-btn">↩ UNDO</button>
+    <button class="reset-btn" id="reset-btn">RESET</button>
+  </div>
+
+  <div class="history-section">
+    <h3>操作履歴</h3>
+    <div class="history-list" id="history-list"></div>
+  </div>
+
+  <script type="module" src="operate.js"></script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #0f0f1a;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* ===== ページ切り替えボタン ===== */
+.page-switch-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.page-switch-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== 表示ページ ===== */
+.display-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  padding: 0 40px;
+}
+
+.team {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.team-name {
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-weight: bold;
+  letter-spacing: 0.25em;
+}
+
+.score {
+  font-size: clamp(6rem, 18vw, 16rem);
+  font-weight: 900;
+  font-family: 'Courier New', 'Courier', monospace;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.home-team .team-name,
+.home-team .score {
+  color: #FFD700;
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+.guest-team .team-name,
+.guest-team .score {
+  color: #22C55E;
+  text-shadow: 0 0 40px rgba(34, 197, 94, 0.3);
+}
+
+.divider {
+  font-size: clamp(4rem, 10vw, 10rem);
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 1;
+}
+
+/* ===== 操作ページ ===== */
+.operate-page {
+  padding: 20px;
+  padding-top: 70px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.current-scores {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.current-score-home {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.current-score-guest {
+  color: #22C55E;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.current-score-separator {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1.5rem;
+}
+
+.current-score-value {
+  font-size: 2.2rem;
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* ===== チーム操作グリッド ===== */
+.teams-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.team-controls {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 20px 16px;
+}
+
+.team-controls h2 {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+  letter-spacing: 0.15em;
+}
+
+.home-controls h2 {
+  color: #FFD700;
+}
+
+.guest-controls h2 {
+  color: #22C55E;
+}
+
+.score-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.minus-row {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.score-btn {
+  padding: 18px 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.15s;
+  touch-action: manipulation;
+}
+
+.score-btn:active {
+  transform: scale(0.93);
+  opacity: 0.8;
+}
+
+.home-controls .score-btn.plus {
+  background: #FFD700;
+  color: #000;
+}
+
+.home-controls .score-btn.minus {
+  background: rgba(255, 215, 0, 0.12);
+  color: #FFD700;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+}
+
+.guest-controls .score-btn.plus {
+  background: #22C55E;
+  color: #000;
+}
+
+.guest-controls .score-btn.minus {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22C55E;
+  border: 2px solid rgba(34, 197, 94, 0.5);
+}
+
+/* ===== アクションボタン ===== */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.undo-btn,
+.reset-btn {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  touch-action: manipulation;
+}
+
+.undo-btn:active,
+.reset-btn:active {
+  transform: scale(0.97);
+}
+
+.undo-btn {
+  background: #6366F1;
+  color: #fff;
+}
+
+.reset-btn {
+  background: #EF4444;
+  color: #fff;
+}
+
+.undo-btn:hover {
+  opacity: 0.85;
+}
+
+.reset-btn:hover {
+  opacity: 0.85;
+}
+
+/* ===== 操作履歴 ===== */
+.history-section h3 {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.history-item {
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-item.home {
+  border-left: 3px solid #FFD700;
+}
+
+.history-item.guest {
+  border-left: 3px solid #22C55E;
+}
+
+.history-item .team-label {
+  font-weight: bold;
+}
+
+.history-item.home .team-label {
+  color: #FFD700;
+}
+
+.history-item.guest .team-label {
+  color: #22C55E;
+}
+
+.history-item .points-label {
+  font-family: 'Courier New', monospace;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.history-item .score-after {
+  font-family: 'Courier New', monospace;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
