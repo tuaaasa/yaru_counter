@@ -20,7 +20,12 @@ function randomAnimalName() {
 const STORAGE_KEY = 'kabaddi_operator_name';
 
 function loadOperatorName() {
-  return localStorage.getItem(STORAGE_KEY) || randomAnimalName();
+  let name = localStorage.getItem(STORAGE_KEY);
+  if (!name) {
+    name = randomAnimalName();
+    localStorage.setItem(STORAGE_KEY, name);
+  }
+  return name;
 }
 
 function saveOperatorName(name) {
