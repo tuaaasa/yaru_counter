@@ -260,6 +260,39 @@ body {
   opacity: 0.85;
 }
 
+/* ===== オペレーター名 ===== */
+.operator-name-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+}
+
+.operator-name-bar label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+.operator-name-bar input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  outline: none;
+}
+
+.operator-name-bar input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 /* ===== 操作履歴 ===== */
 .history-section h3 {
   font-size: 0.85rem;
@@ -314,8 +347,22 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
+.history-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .history-item .score-after {
   font-family: 'Courier New', monospace;
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.85rem;
+}
+
+.history-item .operator-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 7px;
+  border-radius: 4px;
 }

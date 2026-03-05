@@ -2,6 +2,31 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 import { firebaseConfig } from "./config.js";
 
+const ANIMALS = [
+  'ライオン', 'トラ', 'ヒョウ', 'チーター', 'ゾウ', 'キリン', 'カバ', 'サイ',
+  'シマウマ', 'バッファロー', 'ゴリラ', 'チンパンジー', 'オランウータン', 'パンダ',
+  'コアラ', 'カンガルー', 'ウォンバット', 'アルマジロ', 'ナマケモノ', 'カピバラ',
+  'ジャガー', 'オオカミ', 'キツネ', 'タヌキ', 'クマ', 'ホッキョクグマ', 'ヒグマ',
+  'イルカ', 'シャチ', 'ラッコ', 'アザラシ', 'セイウチ', 'ペンギン', 'フラミンゴ',
+  'クジャク', 'オウム', 'ワシ', 'フクロウ', 'ペリカン', 'コウノトリ',
+  'ワニ', 'カメレオン', 'イグアナ', 'コモドドラゴン', 'ガラパゴスガメ',
+  'タコ', 'イカ', 'クラゲ', 'タツノオトシゴ', 'ハリネズミ',
+];
+
+function randomAnimalName() {
+  return ANIMALS[Math.floor(Math.random() * ANIMALS.length)];
+}
+
+const STORAGE_KEY = 'kabaddi_operator_name';
+
+function loadOperatorName() {
+  return localStorage.getItem(STORAGE_KEY) || randomAnimalName();
+}
+
+function saveOperatorName(name) {
+  localStorage.setItem(STORAGE_KEY, name);
+}
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
@@ -39,8 +64,9 @@ onValue(historyRef, (snapshot) => {
 async function addPoints(team, points) {
   const prevScore = { home: currentScore.home, guest: currentScore.guest };
   const newScore = { ...prevScore, [team]: prevScore[team] + points };
+  const operator = document.getElementById('operator-name-input').value.trim() || loadOperatorName();
   await set(scoreRef, newScore);
-  await push(historyRef, { team, points, prevScore, timestamp: Date.now() });
+  await push(historyRef, { team, points, prevScore, operator, timestamp: Date.now() });
 }
 
 async function undo() {
@@ -69,7 +95,10 @@ function renderHistory() {
 
     el.innerHTML = `
       <span class="team-label">${teamLabel} <span class="points-label">${pointsLabel}</span></span>
-      <span class="score-after">→ ${formatScore(scoreAfter)}</span>
+      <span class="history-right">
+        <span class="score-after">→ ${formatScore(scoreAfter)}</span>
+        <span class="operator-label">${item.operator || '?'}</span>
+      </span>
     `;
     list.appendChild(el);
   });
@@ -84,3 +113,11 @@ document.querySelectorAll('.score-btn').forEach((btn) => {
 
 document.getElementById('undo-btn').addEventListener('click', undo);
 document.getElementById('reset-btn').addEventListener('click', resetAll);
+
+// 名前の初期化と保存
+const nameInput = document.getElementById('operator-name-input');
+nameInput.value = loadOperatorName();
+nameInput.addEventListener('change', () => {
+  const name = nameInput.value.trim();
+  if (name) saveOperatorName(name);
+});
