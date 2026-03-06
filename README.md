@@ -6,8 +6,8 @@
 
 | ページ | URL | 説明 |
 |--------|-----|------|
-| 表示ページ | `index.html` | スコアを大きく表示（プロジェクター・大画面用） |
-| 操作ページ | `operate.html` | 得点操作・UNDO・RESET・履歴（スマホ・タブレット用） |
+| 表示ページ | https://tuaaasa.github.io/yaru_counter/ | スコアを大きく表示（プロジェクター・大画面用） |
+| 操作ページ | https://tuaaasa.github.io/yaru_counter/operate.html | 得点操作・UNDO・RESET・履歴（スマホ・タブレット用） |
 
 ## セットアップ手順
 
