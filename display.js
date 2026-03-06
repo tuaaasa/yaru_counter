@@ -12,9 +12,17 @@ function formatScore(n) {
 
 const homeEl = document.getElementById('home-score');
 const guestEl = document.getElementById('guest-score');
+const homeNameEl = document.getElementById('home-name');
+const guestNameEl = document.getElementById('guest-name');
 
 onValue(ref(db, 'score'), (snapshot) => {
   const data = snapshot.val() || { home: 0, guest: 0 };
   homeEl.textContent = formatScore(data.home);
   guestEl.textContent = formatScore(data.guest);
+});
+
+onValue(ref(db, 'teamNames'), (snapshot) => {
+  const data = snapshot.val() || {};
+  homeNameEl.textContent = data.home || 'HOME';
+  guestNameEl.textContent = data.guest || 'GUEST';
 });

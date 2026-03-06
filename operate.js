@@ -37,6 +37,7 @@ const db = getDatabase(app);
 
 const scoreRef = ref(db, 'score');
 const historyRef = ref(db, 'history');
+const teamNamesRef = ref(db, 'teamNames');
 
 let currentScore = { home: 0, guest: 0 };
 let historyItems = [];
@@ -45,6 +46,27 @@ function formatScore(n) {
   if (n < 0) return `-${String(-n).padStart(2, '0')}`;
   return String(n).padStart(2, '0');
 }
+
+// チーム名のリアルタイム監視
+onValue(teamNamesRef, (snapshot) => {
+  const data = snapshot.val() || {};
+  const homeInput = document.getElementById('home-name-input');
+  const guestInput = document.getElementById('guest-name-input');
+  if (document.activeElement !== homeInput) homeInput.value = data.home || 'HOME';
+  if (document.activeElement !== guestInput) guestInput.value = data.guest || 'GUEST';
+});
+
+// チーム名の変更を Firebase に保存
+document.getElementById('home-name-input').addEventListener('change', (e) => {
+  const name = e.target.value.trim() || 'HOME';
+  e.target.value = name;
+  set(ref(db, 'teamNames/home'), name);
+});
+document.getElementById('guest-name-input').addEventListener('change', (e) => {
+  const name = e.target.value.trim() || 'GUEST';
+  e.target.value = name;
+  set(ref(db, 'teamNames/guest'), name);
+});
 
 // スコアのリアルタイム監視
 onValue(scoreRef, (snapshot) => {
